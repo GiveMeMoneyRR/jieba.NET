@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,6 +25,8 @@ namespace JiebaNet.Analyser
 
         public void SetNewPath(string newIdfPath)
         {
+            if (!Path.IsPathRooted(newIdfPath))
+                newIdfPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, newIdfPath);
             var idfPath = Path.GetFullPath(newIdfPath);
             if (IdfFilePath != idfPath)
             {

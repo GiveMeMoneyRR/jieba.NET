@@ -391,6 +391,9 @@ namespace JiebaNet.Segmenter
         /// <param name="userDictFile"></param>
         public void LoadUserDict(string userDictFile)
         {
+            if (!Path.IsPathRooted(userDictFile))
+                userDictFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, userDictFile);
+
             var dictFullPath = Path.GetFullPath(userDictFile);
             Debug.WriteLine("Initializing user dictionary: " + userDictFile);
 
