@@ -39,6 +39,9 @@ namespace JiebaNet.Segmenter.Tests.FCL
             var stopWatch = new Stopwatch();
             stopWatch.Start();
 
+            if (!Path.IsPathRooted(filePath))
+                filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filePath);
+
             var lines = File.ReadAllLines(filePath, Encoding.UTF8);
             foreach (var line in lines)
             {
@@ -65,6 +68,9 @@ namespace JiebaNet.Segmenter.Tests.FCL
         {
             var stopWatch = new Stopwatch();
             stopWatch.Start();
+
+            if (!Path.IsPathRooted(filePath))
+                filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filePath);
 
             using (var sr = new StreamReader(filePath, Encoding.UTF8))
             {

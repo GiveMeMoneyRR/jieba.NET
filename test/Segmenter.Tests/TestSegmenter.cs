@@ -12,7 +12,10 @@ namespace JiebaNet.Segmenter.Tests
     {
         private string[] GetTestSentences()
         {
-            return File.ReadAllLines(@"Cases\jieba_test.txt");
+            var path = @"Cases\jieba_test.txt";
+            if (!Path.IsPathRooted(path))
+                path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
+            return File.ReadAllLines(path);
         }
 
         [TestCase]
@@ -75,31 +78,46 @@ namespace JiebaNet.Segmenter.Tests
         [TestCase]
         public void TestCut()
         {
-            TestCutFunction((new JiebaSegmenter()).Cut, false, true, @"Cases\accurate_hmm.txt");
+            var path = @"Cases\accurate_hmm.txt";
+            if (!Path.IsPathRooted(path))
+                path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
+            TestCutFunction((new JiebaSegmenter()).Cut, false, true, path);
         }
 
         [TestCase]
         public void TestCutAll()
         {
-            TestCutFunction((new JiebaSegmenter()).Cut, true, false, @"Cases\cut_all.txt");
+            var path = @"Cases\cut_all.txt";
+            if (!Path.IsPathRooted(path))
+                path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
+            TestCutFunction((new JiebaSegmenter()).Cut, true, false, path);
         }
 
         [TestCase]
         public void TestCutWithoutHmm()
         {
-            TestCutFunction((new JiebaSegmenter()).Cut, false, false, @"Cases\accurate_no_hmm.txt");
+            var path = @"Cases\accurate_no_hmm.txt";
+            if (!Path.IsPathRooted(path))
+                path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
+            TestCutFunction((new JiebaSegmenter()).Cut, false, false, path);
         }
 
         [TestCase]
         public void TestCutForSearch()
         {
-            TestCutSearchFunction((new JiebaSegmenter()).CutForSearch, true, @"Cases\cut_search_hmm.txt");
+            var path = @"Cases\cut_search_hmm.txt";
+            if (!Path.IsPathRooted(path))
+                path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
+            TestCutSearchFunction((new JiebaSegmenter()).CutForSearch, true, path);
         }
 
         [TestCase]
         public void TestCutForSearchWithoutHmm()
         {
-            TestCutSearchFunction((new JiebaSegmenter()).CutForSearch, false, @"Cases\cut_search_no_hmm.txt");
+            var path = @"Cases\cut_search_no_hmm.txt";
+            if (!Path.IsPathRooted(path))
+                path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
+            TestCutSearchFunction((new JiebaSegmenter()).CutForSearch, false, path);
         }
 
         #endregion

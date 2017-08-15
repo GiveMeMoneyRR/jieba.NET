@@ -13,8 +13,10 @@ namespace JiebaNet.Segmenter.Tests.FCL
         [TestCase]
         public void TestDeserializeDict()
         {
-            var p = @"Resources\test_dict.json";
-            var jsonContent = File.ReadAllText(p);
+            var path = @"Resources\test_dict.json";
+            if (!Path.IsPathRooted(path))
+                path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
+            var jsonContent = File.ReadAllText(path);
             var probs = JsonConvert.DeserializeObject<Dictionary<char, double>>(jsonContent);
             Assert.That(probs, Is.Not.Null);
             Assert.That(probs.Count, Is.EqualTo(3));
@@ -24,8 +26,10 @@ namespace JiebaNet.Segmenter.Tests.FCL
         [TestCase]
         public void TestDeserializeProbStart()
         {
-            var p = @"Resources\pos_prob_start.json";
-            var jsonContent = File.ReadAllText(p);
+            var path = @"Resources\pos_prob_start.json";
+            if (!Path.IsPathRooted(path))
+                path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
+            var jsonContent = File.ReadAllText(path);
             var probs = JsonConvert.DeserializeObject<IDictionary<string, double>>(jsonContent);
             Assert.That(probs, Is.Not.Null);
             Assert.That(probs.Count, Is.EqualTo(256));
@@ -35,8 +39,10 @@ namespace JiebaNet.Segmenter.Tests.FCL
         [TestCase]
         public void TestDeserializeProbTrans()
         {
-            var p = @"Resources\pos_prob_trans.json";
-            var jsonContent = File.ReadAllText(p);
+            var path = @"Resources\pos_prob_trans.json";
+            if (!Path.IsPathRooted(path))
+                path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
+            var jsonContent = File.ReadAllText(path);
             var probs = JsonConvert.DeserializeObject<IDictionary<string, IDictionary<string, double>>>(jsonContent);
             Assert.That(probs, Is.Not.Null);
             Assert.That(probs.Count, Is.EqualTo(256));
@@ -47,8 +53,10 @@ namespace JiebaNet.Segmenter.Tests.FCL
         [TestCase]
         public void TestDeserializeProbEmit()
         {
-            var p = @"Resources\pos_prob_emit.json";
-            var jsonContent = File.ReadAllText(p);
+            var path = @"Resources\pos_prob_emit.json";
+            if (!Path.IsPathRooted(path))
+                path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
+            var jsonContent = File.ReadAllText(path);
             var probs = JsonConvert.DeserializeObject<IDictionary<string, IDictionary<char, double>>>(jsonContent);
             Assert.That(probs, Is.Not.Null);
             Assert.That(probs.Count, Is.EqualTo(256));
@@ -59,8 +67,10 @@ namespace JiebaNet.Segmenter.Tests.FCL
         [TestCase]
         public void TestDeserializeCharStateTab()
         {
-            var p = @"Resources\char_state_tab.json";
-            var jsonContent = File.ReadAllText(p);
+            var path = @"Resources\char_state_tab.json";
+            if (!Path.IsPathRooted(path))
+                path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
+            var jsonContent = File.ReadAllText(path);
             var probs = JsonConvert.DeserializeObject<IDictionary<string, List<string>>>(jsonContent);
             Assert.That(probs, Is.Not.Null);
             Assert.That(probs.Count, Is.EqualTo(6648));

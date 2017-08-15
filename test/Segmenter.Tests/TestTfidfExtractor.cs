@@ -10,6 +10,8 @@ namespace JiebaNet.Segmenter.Tests
     {
         private string GetFileContents(string fileName)
         {
+            if (!Path.IsPathRooted(fileName))
+                fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
             return File.ReadAllText(fileName);
         }
 

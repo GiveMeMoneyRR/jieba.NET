@@ -12,7 +12,10 @@ namespace JiebaNet.Segmenter.Tests
     {
         private string[] GetTestSentences()
         {
-            return File.ReadAllLines(@"Cases\jieba_test.txt");
+            var path = @"Cases\jieba_test.txt";
+            if (!Path.IsPathRooted(path))
+                path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
+            return File.ReadAllLines(path);
         }
 
         [TestCase]
@@ -20,7 +23,10 @@ namespace JiebaNet.Segmenter.Tests
         {
             var seg = new JiebaSegmenter();
             var posSeg = new PosSegmenter(seg);
-            TestCutFunction(posSeg.Cut, true, @"Cases\pos_cut_hmm.txt");
+            var path = @"Cases\pos_cut_hmm.txt";
+            if(!Path.IsPathRooted(path))
+                path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
+            TestCutFunction(posSeg.Cut, true, path);
         }
 
         [TestCase]
@@ -28,7 +34,10 @@ namespace JiebaNet.Segmenter.Tests
         {
             var seg = new JiebaSegmenter();
             var posSeg = new PosSegmenter(seg);
-            TestCutFunction(posSeg.Cut, false, @"Cases\pos_cut_no_hmm.txt");
+            var path = @"Cases\pos_cut_no_hmm.txt";
+            if (!Path.IsPathRooted(path))
+                path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
+            TestCutFunction(posSeg.Cut, false, path);
         }
 
         [TestCase]
